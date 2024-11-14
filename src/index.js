@@ -4,6 +4,7 @@ const cors = require('cors');
 const logRequest = require('./middleware/logs');
 const UserRoute = require('./routes/users');
 const ProductRoute = require('./routes/products');
+const RentsRoute = require('./routes/rents');
 const app = express();
 const PORT = process.env.PORT;
 
@@ -14,6 +15,7 @@ app.use(logRequest);
 
 app.use('/users', UserRoute);
 app.use('/products', ProductRoute);
+app.use('/rents', RentsRoute);
 
 
 app.listen(PORT, (req, res) => {

@@ -45,7 +45,7 @@ const getUserById = async (req, res) => {
         }
     
         res.json({
-            message: 'Get all users success',
+            message: 'Get user success',
             data: data
         })
         

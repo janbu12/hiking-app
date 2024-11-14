@@ -6,12 +6,57 @@ const createNewProduct = (body) => {
 };
 
 const getAllProduct = () => {
-    const SQLQuery = `SELECT * FROM products LEFT JOIN reviews ON products.produk_id = reviews.produk_id`;
+    const SQLQuery = `
+    SELECT 
+        products.produk_id, 
+        products.nama_produk, 
+        products.deskripsi, 
+        products.stok, 
+        products.harga_sewa, 
+        CONVERT_TZ(products.created_at, '+00:00', '+07:00') AS created_at,
+        CONVERT_TZ(products.updated_at, '+00:00', '+07:00') AS updated_at, 
+        products.gambar, 
+        products.kategori_id,
+        reviews.review_id,
+        reviews.user_id,
+        reviews.rating,
+        reviews.komentar,
+        CONVERT_TZ(reviews.created_at, '+00:00', '+07:00') AS review_created_at
+    FROM 
+        products
+    LEFT JOIN 
+        reviews 
+    ON 
+        products.produk_id = reviews.produk_id
+`;
     return dbPool.execute(SQLQuery);
 };
 
 const getProductById = (id) => {
-    const SQLQuery = `SELECT * FROM products WHERE produk_id = ${id}`;
+    const SQLQuery = `
+    SELECT 
+        products.produk_id, 
+        products.nama_produk, 
+        products.deskripsi, 
+        products.stok, 
+        products.harga_sewa, 
+        CONVERT_TZ(products.created_at, '+00:00', '+07:00') AS created_at,
+        CONVERT_TZ(products.updated_at, '+00:00', '+07:00') AS updated_at, 
+        products.gambar, 
+        products.kategori_id,
+        reviews.review_id,
+        reviews.user_id,
+        reviews.rating,
+        reviews.komentar,
+        CONVERT_TZ(reviews.created_at, '+00:00', '+07:00') AS review_created_at
+    FROM 
+        products
+    LEFT JOIN 
+        reviews 
+    ON 
+        products.produk_id = reviews.produk_id
+    WHERE products.produk_id = ${id}
+`;
     return dbPool.execute(SQLQuery);
 };
 
