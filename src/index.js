@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const logRequest = require('./middleware/logs');
 const UserRoute = require('./routes/users');
-const ProductRoute = require('./routes/products');
+const ProductRoute = require('./routes/products_rent');
 const RentsRoute = require('./routes/rents');
 const app = express();
 const PORT = process.env.PORT;
@@ -14,7 +14,7 @@ app.use(cors());
 app.use(logRequest);
 
 app.use('/users', UserRoute);
-app.use('/products', ProductRoute);
+app.use('/productsRents', ProductRoute);
 app.use('/rents', RentsRoute);
 
 

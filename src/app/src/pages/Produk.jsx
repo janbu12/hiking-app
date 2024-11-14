@@ -7,8 +7,8 @@ export default function Produk() {
 
     const fetchData = async (id) => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_URL_LOCAL}products/${id}`);
-            const data = await response.json();
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL_LOCAL}/productsRents/${id}`);
+            const {data} = await response.json();
             setData(data);
             console.log(data);
         } catch (error) {
@@ -25,8 +25,28 @@ export default function Produk() {
     
     return (
         <>
-            <div>Produk {id}</div>
-            <h1></h1>
+            {data.map((data)=>{
+                return (
+                    <div key={data.produk_id}>
+                        <h1>{data.nama_produk}</h1>
+                        <p>{data.dekripsi}</p>
+                        <p>Harga: Rp. {data.harga_sewa}</p>
+                        <p>Stok: {data.stok}</p>
+                        <button>Beli</button>
+                        <button>Tambah ke Keranjang</button>
+                        <div>
+                            <h2>Reviews</h2>
+                            {data.reviews.map((review) => (
+                                <div key={review.review_id}>
+                                    <h3>Rating: {review.rating}</h3>
+                                    <p>Komentar: {review.komentar}</p>
+                                    <p>Tanggal: {review.review_created_at}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>                        
+                )
+            })}
         </>
     )
 }
